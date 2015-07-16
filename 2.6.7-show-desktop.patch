@@ -5,16 +5,9 @@
  		self->priv->no_desktop = TRUE;
  	}
 +	if (!self->priv->no_desktop &&
-+	    !strstr(g_getenv("XDG_CURRENT_DESKTOP"), "Cinnamon")) {
++	    !strstr(g_getenv("XDG_CURRENT_DESKTOP") ?: "", "Cinnamon")) {
 +		self->priv->no_desktop = TRUE;
 +	}
  
  	if (!self->priv->no_desktop) {
  		nemo_application_open_desktop (self);
-@@ -1395,4 +1399,4 @@ gboolean
- nemo_application_get_cache_problem_ignored (NemoApplication *application)
- {
-     return application->priv->ignore_cache_problem;
--}
-\ No newline at end of file
-+}
