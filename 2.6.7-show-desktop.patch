@@ -1,0 +1,20 @@
+--- origsrc/nemo-2.6.7/src/nemo-application.c	2015-06-22 16:36:38.000000000 -0500
++++ src/nemo-2.6.7/src/nemo-application.c	2015-07-16 03:58:10.313246000 -0500
+@@ -1111,6 +1111,10 @@ init_desktop (NemoApplication *self)
+ 				     NEMO_PREFERENCES_SHOW_DESKTOP)) {
+ 		self->priv->no_desktop = TRUE;
+ 	}
++	if (!self->priv->no_desktop &&
++	    !strstr(g_getenv("XDG_CURRENT_DESKTOP"), "Cinnamon")) {
++		self->priv->no_desktop = TRUE;
++	}
+ 
+ 	if (!self->priv->no_desktop) {
+ 		nemo_application_open_desktop (self);
+@@ -1395,4 +1399,4 @@ gboolean
+ nemo_application_get_cache_problem_ignored (NemoApplication *application)
+ {
+     return application->priv->ignore_cache_problem;
+-}
+\ No newline at end of file
++}

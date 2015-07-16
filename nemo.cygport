@@ -1,0 +1,26 @@
+inherit gnome2
+
+NAME="nemo"
+VERSION=2.6.7
+RELEASE=1
+CATEGORY="Libs"
+SUMMARY="Cinnamon file manager"
+DESCRIPTION="Nemo is the file manager for the Cinnamon desktop environment."
+HOMEPAGE="http://cinnamon.linuxmint.com/"
+SRC_URI="https://github.com/linuxmint/${NAME}/archive/${VERSION}/${NAME}-${VERSION}.tar.gz"
+PATCH_URI="
+	2.6.5-vpath.patch
+	2.6.7-show-desktop.patch
+"
+
+PKG_NAMES="${NAME} ${NAME}-devel ${NAME}-doc"
+nemo_REQUIRES="gvfs"
+nemo_CONTENTS="--exclude=gtk-doc etc/ usr/bin/ usr/lib/gir* usr/libexec/ usr/share/"
+nemo_devel_CONTENTS="usr/include/ usr/lib/lib* usr/lib/pkgconfig/"
+nemo_doc_CATEGORY="Doc"
+nemo_doc_SUMMARY="${SUMMARY} (extension API documentation)"
+nemo_doc_CONTENTS="usr/share/gtk-doc/"
+
+DIFF_EXCLUDES="*.nemo_action"
+
+CYGCONF_ARGS="--disable-tracker"
